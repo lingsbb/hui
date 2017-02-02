@@ -1,0 +1,27 @@
+<h2>My Heroes</h2>
+<div>
+  <label>Hero name:</label> <input #heroName />
+  <button (click)="add(heroName.value); heroName.value=''">
+    Add
+  </button>
+</div>
+
+<ul class="heroes">
+
+  <li *ngFor="let hero of heroes" (click)="onSelect(hero)"
+      [class.selected]="hero === selectedHero">
+      <!--当两位英雄匹配时，应用上selected类，否则不应用。属性绑定的语法，实现从数据源(hero === selectedHero表达式)到class属性的单向数据流动-->
+    <span class="badge">{{hero.id}}</span>
+    <span>{{hero.name}}</span>
+	<button class="delete"
+      (click)="delete(hero); $event.stopPropagation()">x</button>
+  </li>
+
+
+</ul>
+<div *ngIf="selectedHero">
+  <h2>
+    {{selectedHero.name | uppercase}} is my hero 大写管道格式化
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>
