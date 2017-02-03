@@ -70,7 +70,8 @@
 </div>
 </div>
 
-<form class="form form-horizontal" id="form-member-add-edit" style="display: none;width: 500px" >
+<!-- Define a tmeplate reference varibale, #memberForm, and initialized it with the value, "ngForm". -->
+<form class="form form-horizontal" id="form-member-add-edit" style="display: none;width: 500px" #memberForm="ngForm">
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>ID：</label>
 		<div class="formControls col-xs-8 col-sm-9">
@@ -84,7 +85,22 @@
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户名：</label>
 		<div class="formControls col-xs-8 col-sm-9">
 			<!--value="{{selectedHero.name}}" -->
-			<input type="text" class="input-text" placeholder="" id="username" name="username" [(ngModel)]="selectedHero.name">
+			<!-- 
+				The original has been commented.
+				<input type="text" class="input-text" placeholder="" id="username" name="username" [(ngModel)]="selectedHero.name">
+			-->
+			<!-- Add form verification: username is not less than 3.  -->
+			<div>
+			<input type="text" class="input-text" placeholder="" id="username" name="username" [(ngModel)]="selectedHero.name" #name="ngModel" required minlength="3">
+				<!-- Optional, if not needed, can be deleted directly. -->
+                <!--<span *ngIf="name.pristine" class="label label-primary">未修改</span>
+                <span *ngIf="name.dirty" class="label label-warning">已修改</span>
+                <span *ngIf="name.valid" class="label label-success">有效</span>-->
+                <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                    <p *ngIf="name.errors?.minlength" style="color: red;">姓名最小长度为3</p>
+                    <p *ngIf="name.errors?.required" style="color: red;">必须输入姓名</p>
+                </div>			
+			</div>
 		</div>
 	</div>
 	<div class="row cl">
@@ -145,7 +161,12 @@
 	<div class="row cl">
 		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
 			<!--<input (click)="submit(); $event.stopPropagation()" class="btn btn-primary radius" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"></button>-->
-			<a class="btn btn-primary radius" (click)="click_submit_add(selectedHero); $event.stopPropagation()">&nbsp;&nbsp;提交&nbsp;&nbsp;</a>
+			<!-- 
+				The original code has been commented
+				<a type="submit" class="btn btn-primary radius" (click)="click_submit_add(selectedHero); $event.stopPropagation()">&nbsp;&nbsp;提交&nbsp;&nbsp;</a>
+			-->
+			<!-- Bind the button's disabled property to the form's over-all validity via the memberForm variable.（通过memberForm变量把按钮的disabled属性绑定到表单的整体有效性） -->
+			<button type="submit" class="btn btn-primary radius" (click)="click_submit_add(selectedHero); $event.stopPropagation()" [disabled]="!memberForm.form.valid">&nbsp;&nbsp;提交&nbsp;&nbsp;</button>
 			<a class="btn btn-primary radius" (click)="click_close_add_win(); $event.stopPropagation()">&nbsp;&nbsp;关闭&nbsp;&nbsp;</a>
 		</div>
 	</div>
