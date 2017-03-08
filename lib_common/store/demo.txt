@@ -1,0 +1,37 @@
+API
+
+store.js exposes a simple API for cross-browser local storage:
+
+// Store current user
+store.set('user', { name:'Marcus' })
+
+// Get current user
+store.get('user')
+
+// Remove current user
+store.remove('user')
+
+// Clear all keys
+store.clearAll()
+
+// Loop over all stored values
+store.each(function(value, key) {
+    console.log(key, '==', value)
+})
+Installation
+
+Using npm:
+
+// Example store.js usage with npm
+var store = require('store')
+store.set('user', { name:'Marcus' })
+store.get('user').name == 'Marcus'
+Using script tag (first download one of the builds):
+
+<!-- Example store.js usage with script tag -->
+<script src="path/to/my/store.legacy.min.js"></script>
+<script>
+var store = require('store')
+store.set('user', { name:'Marcus' })
+store.get('user').name == 'Marcus'
+</script>
