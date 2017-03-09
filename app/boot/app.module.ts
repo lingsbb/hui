@@ -20,6 +20,9 @@ import { Logger }               from '../common/service/logger.service';
 import { HeroService }          from '../common/service/hero.service';
 import { MemberListService }    from '../pages/member-list/member-list.service';
 
+import { MyTodoGuard} from '../common/interceptor/my-todo-guard';
+import { AuthService } from '../common/service/auth.service';
+
 @NgModule({
   imports: [//不要将 Angular 模块的imports数组与文件顶部的import语句弄混淆了。它们的功能不同。只能是NgModule。
     BrowserModule,//自动刷新浏览器服务
@@ -37,7 +40,7 @@ import { MemberListService }    from '../pages/member-list/member-list.service';
     MemberListComponent,//会员管理页面
     MemberListAddComponent//会员管理页面
   ],
-  providers: [ HeroService ,MemberListService,Logger],//单例模式的服务 可以包括日志 共享 HeroService 全局用
+  providers: [ HeroService ,MemberListService,Logger, MyTodoGuard, AuthService],//单例模式的服务 可以包括日志 共享 HeroService 全局用
   bootstrap: [ AppComponent ]//Angular 创建它并插入index.html宿主页面
 })
 export class AppModule { }
