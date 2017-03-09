@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 
 import { Pagination } from '../../common/entity/pagination';
 import { PaginationBase } from '../../common/utils/paginationBase';
-
+import { MybuttonComponent } from '../../common/custom_control/mybutton/mybutton.component';
 
 declare var $:any;
 declare var layer:any;
